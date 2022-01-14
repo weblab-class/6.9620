@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+import SignIn from "./pages/SignIn.js";
+import Profile from "./pages/Profile.js";
+import HostGame from "./pages/HostGame.js";
+import RandomGame from "./pages/RandomGame.js";
 
 import "../utilities.css";
 
@@ -41,7 +44,11 @@ const App = () => {
   return (
     <>
       <Router>
-        <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <SignIn path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Profile path="/profile/:userId" />
+        <HostGame path="/hostgame/" />
+        <JoinGame path="/joingame/" />
+        <RandomGame path="/game/" />
         <NotFound default />
       </Router>
     </>
