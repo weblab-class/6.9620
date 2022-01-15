@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
-import SignIn from "./pages/SignIn.js";
+import Home from "./pages/Home.js";
 import Profile from "./pages/Profile.js";
 import CreateGame from "./pages/CreateGame.js";
 import JoinGame from "./pages/JoinGame.js";
@@ -53,7 +53,7 @@ const App = () => {
         userId={userId}
       />
       <Router>
-        <SignIn path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <Home path="/"/>
         <Profile path="/profile/:userId" />
         <CreateGame path="/creategame/" userId={userId} />
         <JoinGame path="/joingame/" userId={userId} />
