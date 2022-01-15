@@ -15,9 +15,6 @@ const Navigation = (props) => {
     <>
       <nav>
         <div>
-          Type It
-        </div>
-        <div>
           <Link to="/">
             Home
           </Link>

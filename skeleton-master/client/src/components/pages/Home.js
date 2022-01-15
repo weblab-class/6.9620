@@ -7,7 +7,7 @@ import "./Home.css";
 const Home = (props) => {
   return (
     <>
-      Home
+      Type It
     </>
   );
 };
