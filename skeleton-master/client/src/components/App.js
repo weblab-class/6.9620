@@ -3,8 +3,11 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import SignIn from "./pages/SignIn.js";
 import Profile from "./pages/Profile.js";
-import HostGame from "./pages/HostGame.js";
-import RandomGame from "./pages/RandomGame.js";
+import CreateGame from "./pages/CreateGame.js";
+import JoinGame from "./pages/JoinGame.js";
+import LeaderBoard from "./pages/LeaderBoard.js";
+import Wait from "./pages/Wait.js";
+import Game from "./pages/Game.js";
 
 import "../utilities.css";
 
@@ -46,9 +49,11 @@ const App = () => {
       <Router>
         <SignIn path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <Profile path="/profile/:userId" />
-        <HostGame path="/hostgame/" />
-        <JoinGame path="/joingame/" />
-        <RandomGame path="/game/" />
+        <CreateGame path="/creategame/" userId={userId} />
+        <JoinGame path="/joingame/" userId={userId} />
+        <LeaderBoard path="/leaderboard/" />
+        <Wait path="/wait/" userId={userId} />
+        <Game path="/game/" userId={userId} />
         <NotFound default />
       </Router>
     </>
