@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { get } from "../../utilities"
-import "./HostGame.css";
+import "./CreateGame.css";
 
-const HostGame = (props) => {
+const CreateGame = (props) => {
   return (
     <>
-      Host Game
+      Create Game
     </>
   );
 };
 
-export default HostGame;
+export default CreateGame;
