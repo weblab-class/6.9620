@@ -8,6 +8,7 @@ import JoinGame from "./pages/JoinGame.js";
 import LeaderBoard from "./pages/LeaderBoard.js";
 import Wait from "./pages/Wait.js";
 import Game from "./pages/Game.js";
+import Navigation from "./modules/Navigation.js";
 
 import "../utilities.css";
 
@@ -46,6 +47,11 @@ const App = () => {
 
   return (
     <>
+      <Navigation
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        userId={userId}
+      />
       <Router>
         <SignIn path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
         <Profile path="/profile/:userId" />
