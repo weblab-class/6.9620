@@ -13,6 +13,9 @@ const Profile = (props) => {
   if (!user) {
     return (<div> Loading! </div>);
   }
+  if (!props.userId) {
+    return <div>Log in before using Chatbook</div>;
+  }
   return (
     <>
       Profile

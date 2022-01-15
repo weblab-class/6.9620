@@ -54,7 +54,7 @@ const App = () => {
       />
       <Router>
         <Home path="/"/>
-        <Profile path="/profile/:userId" />
+        <Profile path="/profile/:userId" userId={userId} />
         <CreateGame path="/creategame/" userId={userId} />
         <JoinGame path="/joingame/" userId={userId} />
         <LeaderBoard path="/leaderboard/" />

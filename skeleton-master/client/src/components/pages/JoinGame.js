@@ -5,6 +5,9 @@ import "./JoinGame.css";
 import GameCodeInput from "../modules/GameCodeInput.js";
 
 const JoinGame = (props) => {
+  if (!props.userId) {
+    return <div>Log in before using Chatbook</div>;
+  }
   return (
     <>
       <div>
