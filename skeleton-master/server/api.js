@@ -21,6 +21,8 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
+const GameCode = require("./models/gameCode");
+
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -38,9 +40,30 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+router.get("/randomgame", (req, res) => {
+  GameCode.findOneAndDelete({userId: {$ne: req.query.userId}, gameType: req.query.gameType}).then((player) => {
+    if (!player)
+    {
+      GameCode.findOne({userId: req.query.userId, gameType: req.query.gameType}).then((player) => {
+        if (!player)
+        {
+          const newPlayer = new GameCode({userId: req.query.userId, gameType: req.query.gameType});
+          newPlayer.save();
+          res.send(newPlayer);
+        }
+        else
+        {
+          res.send(player);
+        }
+      });
+    }
+    else
+    {
+      console.log("found opponent");
+      res.send(player);
+    }
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

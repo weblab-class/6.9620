@@ -8,6 +8,7 @@ import JoinGame from "./pages/JoinGame.js";
 import LeaderBoard from "./pages/LeaderBoard.js";
 import Wait from "./pages/Wait.js";
 import Game from "./pages/Game.js";
+import RandomGame from "./pages/RandomGame.js";
 import Navigation from "./modules/Navigation.js";
 
 import "../utilities.css";
@@ -59,7 +60,7 @@ const App = () => {
         <JoinGame path="/joingame/" userId={userId} />
         <LeaderBoard path="/leaderboard/" />
         <Wait path="/wait/" userId={userId} />
-        <Game path="/game/" userId={userId} />
+        <RandomGame path="/joingame/random/" userId={userId} />
         <NotFound default />
       </Router>
     </>
