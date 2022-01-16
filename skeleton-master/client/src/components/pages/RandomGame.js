@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { get } from "../../utilities"
+import { socket } from "../../client-socket.js";
 import "./RandomGame.css";
 
 const RandomGame = (props) => {
@@ -14,9 +15,16 @@ const RandomGame = (props) => {
   }
   useEffect(() => {
     document.title = "Game";
+    const changeOpponent = (player) => {
+      setOtherPlayerId(player);
+    };
     get("/api/randomgame", {gameType: "Random", userId: test}).then((code) => {
       setOtherPlayerId(code.userId);
     });
+    socket.on("found_opponent", changeOpponent);
+    return () => {
+      socket.off("found_opponent", changeOpponent);
+    };
   }, []);
   
   

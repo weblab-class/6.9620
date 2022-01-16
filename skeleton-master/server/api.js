@@ -47,8 +47,8 @@ router.get("/user", (req, res) => {
 });
 
 router.get("/deletequeue", (req, res) => {
-  Queue.deleteMany({}).then((players) => {
-    console.log(players);
+  Queue.deleteMany({userId: req.query.userId}).then((players) => {
+    console.log("deleted");
   });
 });
 
@@ -56,15 +56,18 @@ router.get("/randomgame", (req, res) => {
   Queue.findOneAndDelete({userId: {$ne: req.query.userId}, gameType: req.query.gameType}).then((player) => {
     if (!player)
     {
+      console.log("no opponent");
       Queue.findOne({userId: req.query.userId, gameType: req.query.gameType}).then((player) => {
         if (!player)
         {
+          console.log("empty room");
           const newPlayer = new Queue({userId: req.query.userId, gameType: req.query.gameType});
           newPlayer.save();
           res.send(newPlayer);
         }
         else
         {
+          console.log("found self");
           res.send(player);
         }
       });
@@ -73,6 +76,7 @@ router.get("/randomgame", (req, res) => {
     {
       console.log("found opponent");
       res.send(player);
+      socketManager.getSocketFromUserID(player.userId).emit("found_opponent", req.query.userId);
     }
   });
 });
