@@ -8,4 +8,4 @@ const GameCodeSchema = new mongoose.Schema({
 });
 
 // compile model from schema
-module.exports = mongoose.model("GameCode", GameCodeSchema);
+module.exports = mongoose.model("gameCode", GameCodeSchema);

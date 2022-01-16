@@ -8,6 +8,7 @@ const Profile = (props) => {
   useEffect(() => {
     document.title = "Profile";
     get(`/api/user`, { userid: props.userId }).then((userObj) => setUser(userObj));
+    get("/api/deletequeue", {userId: props.userId});
   }, []);
 
   if (!user) {

@@ -21,7 +21,7 @@ import { get, post } from "../utilities";
  * Define the "App" component
  */
 const App = () => {
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -29,8 +29,10 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
       }
+    }).then(() => {
+      get("/api/deletequeue", {userId: userId});
     });
-  }, []);
+  }, [])
 
   const handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
@@ -54,7 +56,7 @@ const App = () => {
         userId={userId}
       />
       <Router>
-        <Home path="/"/>
+        <Home path="/" userId={userId} />
         <Profile path="/profile/:userId" userId={userId} />
         <CreateGame path="/creategame/" userId={userId} />
         <JoinGame path="/joingame/" userId={userId} />

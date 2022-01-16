@@ -40,6 +40,18 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
+router.get("/user", (req, res) => {
+  User.findById(req.query.userid).then((user) => {
+    res.send(user);
+  });
+});
+
+router.get("/deletequeue", (req, res) => {
+  Queue.deleteMany({}).then((players) => {
+    console.log(players);
+  });
+});
+
 router.get("/randomgame", (req, res) => {
   Queue.findOneAndDelete({userId: {$ne: req.query.userId}, gameType: req.query.gameType}).then((player) => {
     if (!player)

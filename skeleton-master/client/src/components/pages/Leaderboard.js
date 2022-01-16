@@ -5,6 +5,7 @@ import "./Leaderboard.css";
 const Leaderboard = (props) => {
   useEffect(() => {
     document.title = "Leaderboard";
+    get("/api/deletequeue", {userId: props.userId});
   }, []);
   return (
     <>
