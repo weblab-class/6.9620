@@ -3,6 +3,9 @@ import { get } from "../../utilities"
 import "./CreateGame.css";
 
 const CreateGame = (props) => {
+  useEffect(() => {
+    document.title = "Create Game";
+  }, []);
   if (!props.userId) {
     return <div>Log in before using Chatbook</div>;
   }

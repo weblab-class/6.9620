@@ -6,7 +6,7 @@ const Profile = (props) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    document.title = "Profile Page";
+    document.title = "Profile";
     get(`/api/user`, { userid: props.userId }).then((userObj) => setUser(userObj));
   }, []);
 

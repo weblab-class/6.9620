@@ -21,7 +21,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-const GameCode = require("./models/gameCode");
+const Queue = require("./models/gameCode");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -41,13 +41,13 @@ router.post("/initsocket", (req, res) => {
 });
 
 router.get("/randomgame", (req, res) => {
-  GameCode.findOneAndDelete({userId: {$ne: req.query.userId}, gameType: req.query.gameType}).then((player) => {
+  Queue.findOneAndDelete({userId: {$ne: req.query.userId}, gameType: req.query.gameType}).then((player) => {
     if (!player)
     {
-      GameCode.findOne({userId: req.query.userId, gameType: req.query.gameType}).then((player) => {
+      Queue.findOne({userId: req.query.userId, gameType: req.query.gameType}).then((player) => {
         if (!player)
         {
-          const newPlayer = new GameCode({userId: req.query.userId, gameType: req.query.gameType});
+          const newPlayer = new Queue({userId: req.query.userId, gameType: req.query.gameType});
           newPlayer.save();
           res.send(newPlayer);
         }

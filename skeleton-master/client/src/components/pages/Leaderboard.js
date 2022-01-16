@@ -3,6 +3,9 @@ import { get } from "../../utilities"
 import "./Leaderboard.css";
 
 const Leaderboard = (props) => {
+  useEffect(() => {
+    document.title = "Leaderboard";
+  }, []);
   return (
     <>
       Leaderboard

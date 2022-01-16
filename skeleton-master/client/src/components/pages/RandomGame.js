@@ -13,6 +13,7 @@ const RandomGame = (props) => {
     test += props.userId[i];
   }
   useEffect(() => {
+    document.title = "Game";
     get("/api/randomgame", {gameType: "Random", userId: test}).then((code) => {
       setOtherPlayerId(code.userId);
     });
