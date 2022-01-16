@@ -7,7 +7,6 @@ import CreateGame from "./pages/CreateGame.js";
 import JoinGame from "./pages/JoinGame.js";
 import LeaderBoard from "./pages/LeaderBoard.js";
 import Wait from "./pages/Wait.js";
-import Game from "./pages/Game.js";
 import RandomGame from "./pages/RandomGame.js";
 import Navigation from "./modules/Navigation.js";
 

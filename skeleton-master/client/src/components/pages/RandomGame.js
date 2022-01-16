@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { get } from "../../utilities"
 import { socket } from "../../client-socket.js";
 import "./RandomGame.css";
+import Game from "../modules/Game.js";
 
 const RandomGame = (props) => {
   if (!props.userId) {
@@ -27,13 +28,20 @@ const RandomGame = (props) => {
     };
   }, []);
   
-  
-  return (
-    <>
-      {test}
-      {otherPlayerId}
-    </>
-  );
+  if (props.userId == otherPlayerId)
+  {
+    return (
+      <>
+        {test}
+        --and--
+        {otherPlayerId}
+      </>
+    );
+  }
+  else
+  {
+    return (<Game turns_left={6} player1={props.userId} player2={otherPlayerId} />);
+  }
 };
 
 export default RandomGame;
