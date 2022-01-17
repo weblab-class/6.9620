@@ -5,7 +5,7 @@ import "./Game.css";
 const Game = (props) => {
   return (
     <>
-      Game
+      {props.pairing.player1.userId}--and--{props.pairing.player2.userId}
     </>
   );
 };

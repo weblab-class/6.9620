@@ -8,7 +8,7 @@ const RandomGame = (props) => {
   if (!props.userId) {
     return <div>Log in before using Chatbook</div>;
   }
-  const [otherPlayerId, setOtherPlayerId] = useState();
+  const [pairing, setPairing] = useState();
   let test = '';
   for (let i = 0; i < props.userId.length; i++)
   {
@@ -16,11 +16,11 @@ const RandomGame = (props) => {
   }
   useEffect(() => {
     document.title = "Game";
-    const changeOpponent = (player) => {
-      setOtherPlayerId(player);
+    const changeOpponent = (pairing) => {
+      setPairing(pairing);
     };
-    get("/api/randomgame", {gameType: "Random", userId: test}).then((code) => {
-      setOtherPlayerId(code.userId);
+    get("/api/randomgame", {gameType: "Random", userId: test}).then((pairing) => {
+      setPairing(pairing);
     });
     socket.on("found_opponent", changeOpponent);
     return () => {
@@ -28,19 +28,24 @@ const RandomGame = (props) => {
     };
   }, []);
   
-  if (props.userId == otherPlayerId)
+  if (!pairing)
   {
-    return (
-      <>
-        {test}
-        --and--
-        {otherPlayerId}
-      </>
-    );
+    return (<>Loading</>);
   }
   else
   {
-    return (<Game turns_left={6} player1={props.userId} player2={otherPlayerId} />);
+    if (pairing.player1.userId == pairing.player2.userId)
+    {
+      return (
+        <>
+          Waiting for random Player
+        </>
+      );
+    }
+    else
+    {
+      return (<Game turns_left={6} pairing={pairing} />);
+    }
   }
 };
 

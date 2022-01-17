@@ -63,20 +63,30 @@ router.get("/randomgame", (req, res) => {
           console.log("empty room");
           const newPlayer = new Queue({userId: req.query.userId, gameType: req.query.gameType});
           newPlayer.save();
-          res.send(newPlayer);
+          res.send({player1: newPlayer, player2: newPlayer});
         }
         else
         {
           console.log("found self");
-          res.send(player);
+          res.send({player1: player, player2: player});
         }
       });
     }
     else
     {
+      const ownPlayer = new Queue({userId: req.query.userId, gameType: req.query.gameType});
       console.log("found opponent");
-      res.send(player);
-      socketManager.getSocketFromUserID(player.userId).emit("found_opponent", req.query.userId);
+      const firstTurn = Math.floor(Math.random() * 2);
+      if (firstTurn === 0)
+      {
+        res.send({player1: ownPlayer, player2: player});
+        socketManager.getSocketFromUserID(player.userId).emit("found_opponent", {player1: ownPlayer, player2: player});
+      }
+      else
+      {
+        res.send({player1: player, player2: ownPlayer});
+        socketManager.getSocketFromUserID(player.userId).emit("found_opponent", {player1: player, player2: ownPlayer});
+      }
     }
   });
 });
