@@ -9,10 +9,10 @@ const Game = (props) => {
   // initialize states
   const [player1Point, setPlayer1Point] = useState(0);
   const [player2Point, setPlayer2Point] = useState(0);
-  // for both players, the current word is always stored in the word state
   const [word, setWord] = useState("");
   const [turn, setTurn] = useState(1);
   const [hint, setHint] = useState("");
+  const [answer, setAnswer] = useState("");
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
 
@@ -22,10 +22,7 @@ const Game = (props) => {
   for (let i = 0; i < props.pairing.player1.userId.length; i++)
   {
     userId1 += props.pairing.player1.userId[i];
-  }
-
-
-  // getting userId2
+  }// getting userId2
   let userId2 = '';
   for (let i = 0; i < props.pairing.player2.userId.length; i++)
   {
@@ -33,6 +30,7 @@ const Game = (props) => {
   }
 
 
+  // get names
   useEffect (() => {
     get(`/api/user`, { userid: userId1 }).then((user) => {setName1(user.name);});
   }, []);
@@ -47,6 +45,8 @@ const Game = (props) => {
     if (props.pairing.player1.userId === props.userId)
     {      
       const [value, setValue] = useState("");
+
+
       // asking for a new word
       useEffect(() => {
         get("/api/getword", {opponent: userId2}).then((word) => {
@@ -54,20 +54,23 @@ const Game = (props) => {
         });
       }, []);
 
+
+      // handle hint submission
       const submitHint = (hint) => {
         post("/api/hint", {hint: hint, opponent: props.pairing.player2.userId});
         setHint(hint);
-      }
-
+      };
       const handleChange = (event) => {
         setValue(event.target.value);
       };
-
-      const handleSubmit = (event) => {
+      const handleSubmitHint = (event) => {
         event.preventDefault();
         submitHint(value);
         setValue("");
       };
+
+
+
       return (
         <>
           <div className="titleContainer">
@@ -77,7 +80,7 @@ const Game = (props) => {
             <p className="word">Your word is {word}</p>
           </div>
           <div className="container">
-            <div className="GameCodeContainer">
+            <div className="hintContainer">
               <input
                 type="text"
                 placeholder="Your Hint"
@@ -88,7 +91,7 @@ const Game = (props) => {
               <button
                 type="submit"
                 value="Submit"
-                onClick={handleSubmit}
+                onClick={handleSubmitHint}
                 className="NewPostInput-button"
               >
                 Submit Hint
@@ -100,6 +103,9 @@ const Game = (props) => {
     }
     else
     {
+      const [value, setValue] = useState("");
+
+
       // getting new word
       useEffect(() => {
         const changeWord = (newWord) => {
@@ -110,6 +116,9 @@ const Game = (props) => {
           socket.off("found_word", changeWord);
         };
       }, []);
+
+
+      // getting new hint
       useEffect(() => {
         const changeHint = (newHint) => {
           setHint(newHint);
@@ -119,6 +128,25 @@ const Game = (props) => {
           socket.off("hint", changeHint);
         };
       }, []);
+      
+
+      // handle answer submission
+      const submitAnswer = (answer) => {
+        console.log(answer);
+        post("/api/answer", {answer: answer, opponent: props.pairing.player1.userId});
+        setAnswer(answer);
+      };
+      const handleChange = (event) => {
+        setValue(event.target.value);
+      };
+      const handleSubmitAnswer = (event) => {
+        event.preventDefault();
+        submitAnswer(value);
+        setValue("");
+      };
+
+
+
       return (
         <>
           <div className="titleContainer">
@@ -126,6 +154,26 @@ const Game = (props) => {
           </div>
           <div className="wordContainer">
             <p className="word">The hint is {hint}</p>
+          </div>
+          
+          <div className="container">
+            <div className="hintContainer">
+              <input
+                type="text"
+                placeholder="Your Answer"
+                value={value}
+                onChange={handleChange}
+                className="NewPostInput-input"
+              />
+              <button
+                type="submit"
+                value="Submit"
+                onClick={handleSubmitAnswer}
+                className="NewPostInput-button"
+              >
+                Submit Answer
+              </button>
+            </div>
           </div>
         </>
       );
@@ -135,6 +183,10 @@ const Game = (props) => {
   {
     if (props.pairing.player1.userId === props.userId)
     {
+      const [value, setValue] = useState("");
+
+
+
       // getting new word
       useEffect(() => {
         const changeWord = (newWord) => {
@@ -145,6 +197,9 @@ const Game = (props) => {
           socket.off("found_word", changeWord);
         };
       }, []);
+
+
+      // getting new hint
       useEffect(() => {
         const changeHint = (newHint) => {
           setHint(newHint);
@@ -154,6 +209,25 @@ const Game = (props) => {
           socket.off("hint", changeHint);
         };
       }, []);
+      
+
+      // handle answer submission
+      const submitAnswer = (answer) => {
+        console.log(answer);
+        post("/api/answer", {answer: answer, opponent: props.pairing.player1.userId});
+        setAnswer(answer);
+      };
+      const handleChange = (event) => {
+        setValue(event.target.value);
+      };
+      const handleSubmitAnswer = (event) => {
+        event.preventDefault();
+        submitAnswer(value);
+        setValue("");
+      };
+
+
+
       return (
         <>
           <div className="titleContainer">
@@ -162,12 +236,34 @@ const Game = (props) => {
           <div className="wordContainer">
             <p className="word">The hint is {hint}</p>
           </div>
+          
+          <div className="container">
+            <div className="hintContainer">
+              <input
+                type="text"
+                placeholder="Your Answer"
+                value={value}
+                onChange={handleChange}
+                className="NewPostInput-input"
+              />
+              <button
+                type="submit"
+                value="Submit"
+                onClick={handleSubmitAnswer}
+                className="NewPostInput-button"
+              >
+                Submit Answer
+              </button>
+            </div>
+          </div>
         </>
       );
     }
     else
     {
       const [value, setValue] = useState("");
+
+
       // asking for a new word
       useEffect(() => {
         get("/api/getword", {opponent: userId1}).then((word) => {
@@ -175,20 +271,24 @@ const Game = (props) => {
         });
       }, []);
 
+
+      // handle hint submission
       const submitHint = (hint) => {
         post("/api/hint", {hint: hint, opponent: props.pairing.player1.userId});
         setHint(hint);
-      }
-
+      };
       const handleChange = (event) => {
         setValue(event.target.value);
       };
-
-      const handleSubmit = (event) => {
+      const handleSubmitHint = (event) => {
         event.preventDefault();
         submitHint(value);
+        console.log(answer);
         setValue("");
       };
+
+
+
       return (
         <>
           <div className="titleContainer">
@@ -198,7 +298,7 @@ const Game = (props) => {
             <p className="word">Your word is {word}</p>
           </div>
           <div className="container">
-            <div className="GameCodeContainer">
+            <div className="hintContainer">
               <input
                 type="text"
                 placeholder="Your Hint"
@@ -209,7 +309,7 @@ const Game = (props) => {
               <button
                 type="submit"
                 value="Submit"
-                onClick={handleSubmit}
+                onClick={handleSubmitHint}
                 className="NewPostInput-button"
               >
                 Submit Hint

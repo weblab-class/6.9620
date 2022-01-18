@@ -58,7 +58,7 @@
   background-color: var(--primary);
 }
 
-.GameCodeContainer {
+.hintContainer {
   position: relative;
   top: 25px;
   height: 50px;
