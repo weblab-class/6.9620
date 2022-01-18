@@ -123,6 +123,11 @@ router.get("/getword", (req,res) => {
   });
 });
 
+router.post("/hint", (req, res) => {
+  console.log(req.body.hint);
+  // TODO
+});
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
