@@ -119,6 +119,7 @@ router.get("/getword", (req,res) => {
   getWord.find({}).then((words) => {
     const pick = Math.floor(Math.random() * words.length)
     res.send(words[pick]);
+    socketManager.getSocketFromUserID(req.query.opponent).emit("found_word", words[pick]);
   });
 });
 

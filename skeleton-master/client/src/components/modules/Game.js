@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { get } from "../../utilities"
+import { socket } from "../../client-socket.js";
 import "./Game.css";
 
 const Game = (props) => {
@@ -22,7 +23,7 @@ const Game = (props) => {
     if (props.pairing.player1.userId === props.userId)
     {
       useEffect(() => {
-        get("/api/getword", {userId1: userId1, userId2: userId2}).then((word) => {
+        get("/api/getword", {opponent: userId2}).then((word) => {
           setWord(word.word);
         });
       }, []);
@@ -30,13 +31,22 @@ const Game = (props) => {
         <>
           <div>You are playing with {props.pairing.player2.userId}</div>
           <div>
-            Your word is {word}
+            Your word is
           </div>
         </>
       );
     }
     else
     {
+      useEffect(() => {
+        const changeWord = (newWord) => {
+          setWord(newWord.word);
+        };
+        socket.on("found_word", changeWord);
+        return () => {
+          socket.off("found_word", changeWord);
+        };
+      }, []);
       return (
         <>
           <div>You are playing with {props.pairing.player1.userId}</div>
@@ -51,11 +61,20 @@ const Game = (props) => {
   {
     if (props.pairing.player1.userId === props.userId)
     {
+      useEffect(() => {
+        const changeWord = (newWord) => {
+          setWord(newWord.word);
+        };
+        socket.on("found_word", changeWord);
+        return () => {
+          socket.off("found_word", changeWord);
+        };
+      }, []);
       return (
         <>
           <div>You are playing with {props.pairing.player2.userId}</div>
           <div>
-            The hint is
+            The hint is {word}
           </div>
         </>
       );
@@ -63,7 +82,7 @@ const Game = (props) => {
     else
     {
       useEffect(() => {
-        get("/api/getword", {userId1: userId1, userId2: userId2}).then((word) => {
+        get("/api/getword", {opponent: userId1}).then((word) => {
           setWord(word.word);
         });
       }, []);
