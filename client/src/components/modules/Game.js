@@ -13,6 +13,8 @@ const Game = (props) => {
   const [word, setWord] = useState("");
   const [turn, setTurn] = useState(1);
   const [hint, setHint] = useState("");
+  const [name1, setName1] = useState("");
+  const [name2, setName2] = useState("");
 
 
   // getting userId1, for some reason, passing props.pairing.player1.userId.length to the API request does not work
@@ -29,6 +31,14 @@ const Game = (props) => {
   {
     userId2 += props.pairing.player2.userId[i];
   }
+
+
+  useEffect (() => {
+    get(`/api/user`, { userid: userId1 }).then((user) => {setName1(user.name);});
+  }, []);
+  useEffect (() => {
+    get(`/api/user`, { userid: userId2 }).then((user) => {setName2(user.name);});
+  }, []);
 
 
   // splitting the case, whether or not this player is player 1 or player 2, and whether it is player 1's turn or player 2's turn
@@ -61,7 +71,7 @@ const Game = (props) => {
       return (
         <>
           <div className="titleContainer">
-            <h1 className="title">You are playing with {props.pairing.player2.userId}</h1>
+            <h1 className="title">You are playing with {name2}</h1>
           </div>
           <div className="wordContainer">
             <p className="word">Your word is {word}</p>
@@ -112,7 +122,7 @@ const Game = (props) => {
       return (
         <>
           <div className="titleContainer">
-            <h1 className="title">You are playing with {props.pairing.player1.userId}</h1>
+            <h1 className="title">You are playing with {name1}</h1>
           </div>
           <div className="wordContainer">
             <p className="word">The hint is {hint}</p>
@@ -147,7 +157,7 @@ const Game = (props) => {
       return (
         <>
           <div className="titleContainer">
-            <h1 className="title">You are playing with {props.pairing.player2.userId}</h1>
+            <h1 className="title">You are playing with {name2}</h1>
           </div>
           <div className="wordContainer">
             <p className="word">The hint is {hint}</p>
@@ -182,7 +192,7 @@ const Game = (props) => {
       return (
         <>
           <div className="titleContainer">
-            <h1 className="title">You are playing with {props.pairing.player1.userId}</h1>
+            <h1 className="title">You are playing with {name1}</h1>
           </div>
           <div className="wordContainer">
             <p className="word">Your word is {word}</p>
