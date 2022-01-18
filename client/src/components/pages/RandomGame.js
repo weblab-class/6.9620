@@ -38,7 +38,9 @@ const RandomGame = (props) => {
     {
       return (
         <>
-          Waiting for random Player
+          <div className="titleContainer">
+            <h1 className="title">Waiting for<br />Random Player</h1>
+          </div>
         </>
       );
     }

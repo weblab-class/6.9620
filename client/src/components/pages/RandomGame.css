@@ -1,1 +1,13 @@
-/* Fill me in :) */
+.titleContainer {
+  position: relative;
+  top: 150px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font: italic small-caps bold 16px/2 cursive;
+  font-size: 100px;
+}

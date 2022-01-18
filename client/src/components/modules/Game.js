@@ -63,24 +63,30 @@ const Game = (props) => {
       };
       return (
         <>
-          <div>You are playing with {props.pairing.player2.userId}</div>
-          <div>
-            Your word is
+          <div className="titleContainer">
+            <h1 className="title">You are playing with {props.pairing.player2.userId}</h1>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="your hint"
-              value={value}
-              onChange={handleChange}
-            />
-            <button
-              type="submit"
-              value="Submit"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
+          <div className="wordContainer">
+            <p className="word">Your word is {word}</p>
+          </div>
+          <div className="container">
+            <div className="GameCodeContainer">
+              <input
+                type="text"
+                placeholder="Your Hint"
+                value={value}
+                onChange={handleChange}
+                className="NewPostInput-input"
+              />
+              <button
+                type="submit"
+                value="Submit"
+                onClick={handleSubmit}
+                className="NewPostInput-button"
+              >
+                Submit Hint
+              </button>
+            </div>
           </div>
         </>
       );
@@ -99,9 +105,11 @@ const Game = (props) => {
       }, []);
       return (
         <>
-          <div>You are playing with {props.pairing.player1.userId}</div>
-          <div>
-            The hint is
+          <div className="titleContainer">
+            <h1 className="title">You are playing with {props.pairing.player1.userId}</h1>
+          </div>
+          <div className="wordContainer">
+            <p className="word">The hint is</p>
           </div>
         </>
       );
@@ -123,9 +131,11 @@ const Game = (props) => {
       }, []);
       return (
         <>
-          <div>You are playing with {props.pairing.player2.userId}</div>
-          <div>
-            The hint is {word}
+          <div className="titleContainer">
+            <h1 className="title">You are playing with {props.pairing.player2.userId}</h1>
+          </div>
+          <div className="wordContainer">
+            <p className="word">The hint is</p>
           </div>
         </>
       );
@@ -160,24 +170,30 @@ const Game = (props) => {
       };
       return (
         <>
-          <div>You are playing with {props.pairing.player1.userId}</div>
-          <div>
-            Your word is
+          <div className="titleContainer">
+            <h1 className="title">You are playing with {props.pairing.player1.userId}</h1>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="your hint"
-              value={value}
-              onChange={handleChange}
-            />
-            <button
-              type="submit"
-              value="Submit"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
+          <div className="wordContainer">
+            <p className="word">Your word is {word}</p>
+          </div>
+          <div className="container">
+            <div className="GameCodeContainer">
+              <input
+                type="text"
+                placeholder="Your Hint"
+                value={value}
+                onChange={handleChange}
+                className="NewPostInput-input"
+              />
+              <button
+                type="submit"
+                value="Submit"
+                onClick={handleSubmit}
+                className="NewPostInput-button"
+              >
+                Submit Hint
+              </button>
+            </div>
           </div>
         </>
       );
