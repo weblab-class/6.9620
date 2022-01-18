@@ -125,6 +125,7 @@ router.get("/getword", (req,res) => {
 
 router.post("/hint", (req, res) => {
   console.log(req.body.hint);
+  socketManager.getSocketFromUserID(req.body.opponent).emit("hint", req.body.hint);
   // TODO
 });
 

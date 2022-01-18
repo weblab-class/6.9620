@@ -12,6 +12,7 @@ const Game = (props) => {
   // for both players, the current word is always stored in the word state
   const [word, setWord] = useState("");
   const [turn, setTurn] = useState(1);
+  const [hint, setHint] = useState("");
 
 
   // getting userId1, for some reason, passing props.pairing.player1.userId.length to the API request does not work
@@ -44,12 +45,8 @@ const Game = (props) => {
       }, []);
 
       const submitHint = (hint) => {
-        let hintPro = '';
-        for (let i = 0; i < hint.length; i++)
-        {
-          hintPro += hint[i];
-        }
-        post("/api/hint", {hint: hintPro});
+        post("/api/hint", {hint: hint, opponent: props.pairing.player2.userId});
+        setHint(hint);
       }
 
       const handleChange = (event) => {
@@ -103,13 +100,22 @@ const Game = (props) => {
           socket.off("found_word", changeWord);
         };
       }, []);
+      useEffect(() => {
+        const changeHint = (newHint) => {
+          setHint(newHint);
+        };
+        socket.on("hint", changeHint);
+        return () => {
+          socket.off("hint", changeHint);
+        };
+      }, []);
       return (
         <>
           <div className="titleContainer">
             <h1 className="title">You are playing with {props.pairing.player1.userId}</h1>
           </div>
           <div className="wordContainer">
-            <p className="word">The hint is</p>
+            <p className="word">The hint is {hint}</p>
           </div>
         </>
       );
@@ -129,13 +135,22 @@ const Game = (props) => {
           socket.off("found_word", changeWord);
         };
       }, []);
+      useEffect(() => {
+        const changeHint = (newHint) => {
+          setHint(newHint);
+        };
+        socket.on("hint", changeHint);
+        return () => {
+          socket.off("hint", changeHint);
+        };
+      }, []);
       return (
         <>
           <div className="titleContainer">
             <h1 className="title">You are playing with {props.pairing.player2.userId}</h1>
           </div>
           <div className="wordContainer">
-            <p className="word">The hint is</p>
+            <p className="word">The hint is {hint}</p>
           </div>
         </>
       );
@@ -151,12 +166,8 @@ const Game = (props) => {
       }, []);
 
       const submitHint = (hint) => {
-        let hintPro = '';
-        for (let i = 0; i < hint.length; i++)
-        {
-          hintPro += hint[i];
-        }
-        post("/api/hint", {hint: hintPro});
+        post("/api/hint", {hint: hint, opponent: props.pairing.player1.userId});
+        setHint(hint);
       }
 
       const handleChange = (event) => {
