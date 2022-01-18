@@ -5,7 +5,7 @@ import Home from "./pages/Home.js";
 import Profile from "./pages/Profile.js";
 import CreateGame from "./pages/CreateGame.js";
 import JoinGame from "./pages/JoinGame.js";
-import LeaderBoard from "./pages/LeaderBoard.js";
+import Leaderboard from "./pages/Leaderboard.js";
 import Wait from "./pages/Wait.js";
 import RandomGame from "./pages/RandomGame.js";
 import Navigation from "./modules/Navigation.js";
@@ -60,7 +60,7 @@ const App = () => {
         <Profile path="/profile/:userId" userId={userId} />
         <CreateGame path="/creategame/" userId={userId} />
         <JoinGame path="/joingame/" userId={userId} />
-        <LeaderBoard path="/leaderboard/" />
+        <Leaderboard path="/leaderboard/" />
         <Wait path="/wait/" userId={userId} />
         <RandomGame path="/joingame/random/" userId={userId} />
         <NotFound default />
