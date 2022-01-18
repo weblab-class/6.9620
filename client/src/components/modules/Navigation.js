@@ -13,9 +13,9 @@ const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.goo
 const Navigation = (props) => {
   return (
     <>
-      <nav>
+      <nav className="NavBar-container">
         <div>
-          <Link to="/">
+          <Link to="/" className="NavBar-link">
             Home
           </Link>
           {props.userId && (
@@ -33,7 +33,7 @@ const Navigation = (props) => {
               Join Game
             </Link>
           )}
-          <Link to="/leaderboard">
+          <Link to="/leaderboard" className="NavBar-link">
             LeaderBoard
           </Link>
           {props.userId ? (

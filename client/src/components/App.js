@@ -11,6 +11,7 @@ import RandomGame from "./pages/RandomGame.js";
 import Navigation from "./modules/Navigation.js";
 
 import "../utilities.css";
+import "./App.css";
 
 import { socket } from "../client-socket.js";
 
