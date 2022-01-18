@@ -12,7 +12,12 @@ const Home = (props) => {
   }, []);
   return (
     <>
-      Type It
+      <div className="titleContainer">
+        <h1 className="title">Type It In</h1>
+      </div>
+      <div className="descContainer">
+        <p className="desc">A Fun Game :)</p>
+      </div>
     </>
   );
 };

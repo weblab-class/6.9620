@@ -1,1 +1,20 @@
-/* Fill me in :) */
+.randomGameButtonContainer {
+  position: relative;
+  top: 150px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.randomGameButton {
+  font: italic small-caps bold 16px/2 cursive;
+  font-size: 14px;
+  padding: var(--s) var(--m);
+  color: var(--primary);
+  border: var(--primary) 1px solid;
+  border-radius: var(--xs) var(--xs) var(--xs) var(--xs);
+  background: none;
+  transition: color 0.1s, background 0.1s;
+  text-decoration: none;
+}

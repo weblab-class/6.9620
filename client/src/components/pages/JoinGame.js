@@ -14,10 +14,12 @@ const JoinGame = (props) => {
   }
   return (
     <>
-      <div>
-        <Link to="/joingame/random/">
-          Random Game
+      <div className="randomGameButtonContainer">
+        <Link to="/joingame/random/" className="randomGameButton">
+          Join Random Game
         </Link>
+      </div>
+      <div>
         {props.userId && <GameCodeInput />}
       </div>
     </>

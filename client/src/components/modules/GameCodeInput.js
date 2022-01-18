@@ -20,19 +20,25 @@ const GameCodeInput = (props) => {
   };
   return (
     <>
-      <input
-        type="text"
-        placeholder="Insert Game Code Here"
-        value={value}
-        onChange={handleChange}
-      />
-      <button
-        type="submit"
-        value="Submit"
-        onClick={handleSubmit}
-      >
-        Submit
-      </button>
+      <div className="container">
+        <div className="GameCodeContainer">
+          <input
+            type="text"
+            placeholder="Insert Game Code Here"
+            value={value}
+            onChange={handleChange}
+            className="NewPostInput-input"
+          />
+          <button
+            type="submit"
+            value="Submit"
+            onClick={handleSubmit}
+            className="NewPostInput-button"
+          >
+            Join With Game Code
+          </button>
+        </div>
+      </div>
     </>
   );
 };
