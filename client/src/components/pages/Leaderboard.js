@@ -9,7 +9,12 @@ const Leaderboard = (props) => {
   }, []);
   return (
     <>
-      Leaderboard
+      <div className="titleContainer">
+        <h1 className="title">Leaderboard</h1>
+      </div>
+      <div className="descContainer">
+        <p className="desc">Not Implemented Yet :(</p>
+      </div>
     </>
   );
 };

@@ -15,11 +15,22 @@ const Profile = (props) => {
     return (<div> Loading! </div>);
   }
   if (!props.userId) {
-    return <div>Log in before using Chatbook</div>;
+    return (
+      <>
+        <div className="titleContainer">
+          <h1 className="title">Log In Before Seeing Profile</h1>
+        </div>
+      </>
+    );
   }
   return (
     <>
-      Profile
+      <div className="titleContainer">
+        <h1 className="title">Profile</h1>
+      </div>
+      <div className="descContainer">
+        <p className="desc">Not Implemented Yet :(</p>
+      </div>
     </>
   );
 };

@@ -8,11 +8,22 @@ const CreateGame = (props) => {
     get("/api/deletequeue", {userId: props.userId});
   }, []);
   if (!props.userId) {
-    return <div>Log in before using Chatbook</div>;
+    return (
+      <>
+        <div className="titleContainer">
+          <h1 className="title">Log In Before<br />Creating Game</h1>
+        </div>
+      </>
+    );
   }
   return (
     <>
-      Create Game
+      <div className="titleContainer">
+        <h1 className="title">Create Game</h1>
+      </div>
+      <div className="descContainer">
+        <p className="desc">Not Implemented Yet :(</p>
+      </div>
     </>
   );
 };

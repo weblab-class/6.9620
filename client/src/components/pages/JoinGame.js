@@ -14,6 +14,9 @@ const JoinGame = (props) => {
   }
   return (
     <>
+      <div className="titleContainer">
+        <h1 className="title">Join Game</h1>
+      </div>
       <div className="randomGameButtonContainer">
         <Link to="/joingame/random/" className="randomGameButton">
           Join Random Game
