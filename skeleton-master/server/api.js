@@ -22,6 +22,7 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 const Queue = require("./models/gameCode");
+const getWord = require("./models/getWord");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -88,6 +89,36 @@ router.get("/randomgame", (req, res) => {
         socketManager.getSocketFromUserID(player.userId).emit("found_opponent", {player1: player, player2: ownPlayer});
       }
     }
+  });
+});
+
+router.post("/createword", (req,res) => {
+  const newWord1 = new getWord({word: "apple"});
+  const newWord2 = new getWord({word: "santa"});
+  const newWord3 = new getWord({word: "pickle"});
+  const newWord4 = new getWord({word: "doctor"});
+  const newWord5 = new getWord({word: "mit"});
+  const newWord6 = new getWord({word: "bottle"});
+  const newWord7 = new getWord({word: "wind"});
+  const newWord8 = new getWord({word: "mask"});
+  const newWord9 = new getWord({word: "covid"});
+  const newWord10 = new getWord({word: "candy"});
+  newWord1.save();
+  newWord2.save();
+  newWord3.save();
+  newWord4.save();
+  newWord5.save();
+  newWord6.save();
+  newWord7.save();
+  newWord8.save();
+  newWord9.save();
+  newWord10.save();
+});
+
+router.get("/getword", (req,res) => {
+  getWord.find({}).then((words) => {
+    const pick = Math.floor(Math.random() * words.length)
+    res.send(words[pick]);
   });
 });
 

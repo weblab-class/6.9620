@@ -9,17 +9,17 @@ const RandomGame = (props) => {
     return <div>Log in before using Chatbook</div>;
   }
   const [pairing, setPairing] = useState();
-  let test = '';
+  let userId = '';
   for (let i = 0; i < props.userId.length; i++)
   {
-    test += props.userId[i];
+    userId += props.userId[i];
   }
   useEffect(() => {
     document.title = "Game";
     const changeOpponent = (pairing) => {
       setPairing(pairing);
     };
-    get("/api/randomgame", {gameType: "Random", userId: test}).then((pairing) => {
+    get("/api/randomgame", {gameType: "Random", userId: userId}).then((pairing) => {
       setPairing(pairing);
     });
     socket.on("found_opponent", changeOpponent);
@@ -44,7 +44,7 @@ const RandomGame = (props) => {
     }
     else
     {
-      return (<Game turns_left={6} pairing={pairing} />);
+      return (<Game turns_left={6} pairing={pairing} userId={props.userId} />);
     }
   }
 };

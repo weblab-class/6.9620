@@ -31,6 +31,7 @@ const App = () => {
     }).then(() => {
       get("/api/deletequeue", {userId: userId});
     });
+    //post("/api/createword");
   }, [])
 
   const handleLogin = (res) => {
