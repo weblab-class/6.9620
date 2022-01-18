@@ -129,7 +129,12 @@ router.post("/hint", (req, res) => {
 });
 
 router.post("/answer", (req, res) => {
-  console.log(req.body.answer);
+  console.log(req.body.word, req.body.answer);
+  if (req.body.answer === req.body.word)
+  {
+    socketManager.getSocketFromUserID(req.body.pairing.player1.userId).emit("change", 0);
+    socketManager.getSocketFromUserID(req.body.pairing.player2.userId).emit("change", 0);
+  }
 });
 
 // anything else falls to this "not found" case

@@ -46,7 +46,7 @@ const RandomGame = (props) => {
     }
     else
     {
-      return (<Game turns_left={6} pairing={pairing} userId={props.userId} />);
+      return (<Game turns={6} pairing={pairing} userId={props.userId} curr_turn={0} curr_point1={0} curr_point2={0} />);
     }
   }
 };

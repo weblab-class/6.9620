@@ -6,13 +6,10 @@ import "./Game.css";
 const Game = (props) => {
 
 
-  // initialize states
-  const [player1Point, setPlayer1Point] = useState(0);
-  const [player2Point, setPlayer2Point] = useState(0);
+  // initialize states]
   const [word, setWord] = useState("");
-  const [turn, setTurn] = useState(1);
   const [hint, setHint] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [change, setChange] = useState(false);
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
 
@@ -37,10 +34,19 @@ const Game = (props) => {
   useEffect (() => {
     get(`/api/user`, { userid: userId2 }).then((user) => {setName2(user.name);});
   }, []);
+  useEffect(() => {
+    const changeTurn = (point) => {
+      setChange(true);
+    };
+    socket.on("change", changeTurn);
+    return () => {
+      socket.off("change", changeTurn);
+    };
+  }, []);
 
 
   // splitting the case, whether or not this player is player 1 or player 2, and whether it is player 1's turn or player 2's turn
-  if (turn % 2 === 1)
+  if (props.curr_turn % 2 === 1)
   {
     if (props.pairing.player1.userId === props.userId)
     {      
@@ -70,7 +76,14 @@ const Game = (props) => {
       };
 
 
-
+      if (change)
+      {
+        return (
+          <>
+            <Game turns={6} pairing={props.pairing} userId={props.userId} curr_turn={props.curr_turn + 1} curr_point1={0} curr_point2={0} />
+          </>
+        );
+      }
       return (
         <>
           <div className="titleContainer">
@@ -133,8 +146,7 @@ const Game = (props) => {
       // handle answer submission
       const submitAnswer = (answer) => {
         console.log(answer);
-        post("/api/answer", {answer: answer, opponent: props.pairing.player1.userId});
-        setAnswer(answer);
+        post("/api/answer", {answer: answer, pairing: props.pairing, word: word});
       };
       const handleChange = (event) => {
         setValue(event.target.value);
@@ -146,7 +158,14 @@ const Game = (props) => {
       };
 
 
-
+      if (change)
+      {
+        return (
+          <>
+            <Game turns={6} pairing={props.pairing} userId={props.userId} curr_turn={props.curr_turn + 1} curr_point1={0} curr_point2={0} />
+          </>
+        );
+      }
       return (
         <>
           <div className="titleContainer">
@@ -214,8 +233,7 @@ const Game = (props) => {
       // handle answer submission
       const submitAnswer = (answer) => {
         console.log(answer);
-        post("/api/answer", {answer: answer, opponent: props.pairing.player1.userId});
-        setAnswer(answer);
+        post("/api/answer", {answer: answer, pairing: props.pairing, word: word});
       };
       const handleChange = (event) => {
         setValue(event.target.value);
@@ -227,7 +245,14 @@ const Game = (props) => {
       };
 
 
-
+      if (change)
+      {
+        return (
+          <>
+            <Game turns={6} pairing={props.pairing} userId={props.userId} curr_turn={props.curr_turn + 1} curr_point1={0} curr_point2={0} />
+          </>
+        );
+      }
       return (
         <>
           <div className="titleContainer">
@@ -288,7 +313,14 @@ const Game = (props) => {
       };
 
 
-
+      if (change)
+      {
+        return (
+          <>
+            <Game turns={6} pairing={props.pairing} userId={props.userId} curr_turn={props.curr_turn + 1} curr_point1={0} curr_point2={0} />
+          </>
+        );
+      }
       return (
         <>
           <div className="titleContainer">
